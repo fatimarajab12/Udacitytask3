@@ -1,0 +1,268 @@
+/*
+ *
+ * CSS written based on SMACSS architecture.
+ * To learn more, visit: http://smacss.com/
+ * 
+ * For simplicity, no reset or normalize is added. 
+ * To learn more, visit: https://css-tricks.com/reboot-resets-reasoning/
+ *
+ */
+
+
+/* ---- Base Rules ---- */
+body {
+    background: rgb(136, 203, 171);
+    background: linear-gradient(
+        0deg,
+        rgba(136, 203, 171, 1) 0%,
+        rgba(0, 13, 60, 1) 100%
+    );
+    margin: 0;
+    font-family: "Merriweather", serif;
+    color: #fff;
+}
+
+/* Typography General */
+h1 {
+    font-family: "Fira Sans", sans-serif;
+    font-size: 3em;
+    margin: 2em 1rem;
+}
+
+@media only screen and (min-width: 35em) {
+    h1 {
+        font-size: 7em;
+        margin: 2em 4rem 1em;
+    }
+}
+
+h2 {
+    border-bottom: 1px solid #cc1;
+    font-family: "Oxygen", Sans-Serif;
+    font-size: 3em;
+    color: #fff;
+}
+
+p {
+    line-height: 1.6em;
+    color: #eee;
+}
+
+/* ---- Layout Rules ---- */
+main {
+    margin: 10vh 1em 10vh;
+}
+
+.main-hero {
+    min-height: 40vh;
+    padding-top: 3em;
+}
+
+section {
+    position: relative;
+    min-height: 80vh;
+    padding: 2em 0;
+}
+
+/* ---- Module Rules ---- */
+
+/* Navigation Styles */
+.navbar__menu ul {
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    list-style: none; /* Remove default list styles */
+}
+
+.navbar__menu li {
+    display: inline-block;
+    margin: 0 1em;
+}
+
+.navbar__menu .menu__link {
+    display: block;
+    padding: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    color: #030521;
+    transition: ease 0.3s all;
+}
+
+.navbar__menu .menu__link:hover {
+    background: #032c48;
+    color: #fff;
+}
+.navbar__toggle {
+    display: none; /* Hide toggle button by default */
+}
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .navbar__list {
+        display: none; /* Hide navigation links on smaller screens */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        z-index: 999;
+    }
+
+    .navbar__list.active {
+        display: flex;
+    }
+
+    .navbar__list li {
+        text-align: center;
+        margin: 0;
+    }
+
+    .navbar__toggle {
+        display: block; /* Show toggle button on smaller screens */
+    }
+
+    .toggle-button {
+        color: #fff;
+        text-decoration: none;
+        padding: 10px;
+        cursor: pointer;
+        display: block;
+        text-align: center;
+    }
+}
+
+/* Header Styles */
+.page__header {
+    background: #fff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+
+/* Footer Styles */
+.page__footer {
+    background: #000;
+    padding: 3em;
+    color: #fff;
+    text-align: center; /* Center align text */
+}
+
+.page__footer p {
+    margin: 0; /* Remove default margin */
+}
+
+/* ---- Theme Rules ---- */
+/* Landing Container Styles */
+.landing__container {
+    padding: 1em;
+    text-align: left;
+}
+
+@media only screen and (min-width: 35em) {
+    .landing__container {
+        max-width: 50em;
+        padding: 4em;
+    }
+}
+
+/* Background Circles */
+/* Note: Adjust pseudo elements based on design needs */
+section:nth-of-type(odd) .landing__container::before {
+    content: "";
+    background: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    z-index: -1;
+    width: 20vh;
+    height: 20vh;
+    border-radius: 50%;
+    opacity: 0;
+    transition: ease 0.5s all;
+}
+
+section:nth-of-type(even) .landing__container::before {
+    content: "";
+    background: rgba(255, 255, 255, 0.2);
+    position: absolute;
+    top: 3em;
+    right: 3em;
+    z-index: -1;
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    opacity: 0;
+    transition: ease 0.5s all;
+}
+
+section:nth-of-type(3n) .landing__container::after {
+    content: "";
+    background: rgba(255, 255, 255, 0.2);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    opacity: 0;
+    transition: ease 0.5s all;
+}
+
+section:nth-of-type(3n + 1) .landing__container::after {
+    content: "";
+    background: rgba(255, 255, 255, 0.2);
+    position: absolute;
+    right: 20vw;
+    bottom: -5em;
+    z-index: -1;
+    width: 15vh;
+    height: 15vh;
+    border-radius: 50%;
+    opacity: 0;
+    transition: ease 0.5s all;
+}
+
+/* ---- Theme State Rules ---- */
+/* Section Active Styles */
+section.your-active-class {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+section.your-active-class .landing__container::before,
+section.your-active-class .landing__container::after {
+    opacity: 1;
+}
+
+/* Section Active Styles Keyframe Animations */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg) translate(-1em) rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg) translate(-1em) rotate(-360deg);
+    }
+}
+
+/* Scroll to Top Button Styles */
+#scrollToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #007bff; /* Bootstrap blue */
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+#scrollToTopBtn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
